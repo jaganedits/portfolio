@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme (default) */
+    --color-midnight: 10 10 15;
+    --color-charcoal: 26 26 36;
+    --color-slate: 45 45 58;
+    --color-silver: 148 163 184;
+    --color-pearl: 226 232 240;
+    --color-accent: 0 255 136;
+    --color-accent-dim: 0 204 106;
+    --color-glow: 0 255 136;
+  }
+
+  .light {
+    --color-midnight: 248 250 252;
+    --color-charcoal: 241 245 249;
+    --color-slate: 203 213 225;
+    --color-silver: 71 85 105;
+    --color-pearl: 15 23 42;
+    --color-accent: 0 180 90;
+    --color-accent-dim: 0 150 75;
+    --color-glow: 0 180 90;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-midnight text-pearl font-body antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 136, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0, 255, 136, 0.05), transparent);
+  }
+
+  .light body {
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 200, 100, 0.06), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0, 200, 100, 0.04), transparent);
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-pearl;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-charcoal;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent/60;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-charcoal/50 backdrop-blur-xl border border-slate/30 rounded-2xl transition-colors duration-300;
+  }
+
+  .light .glass-card {
+    @apply bg-white/80 border-slate/40 shadow-lg shadow-slate/10;
+  }
+
+  .glow-border {
+    @apply relative;
+  }
+
+  .glow-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.3), transparent);
+  }
+
+  .glow-border:hover::before {
+    @apply opacity-100;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent via-emerald-400 to-accent bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient 3s ease infinite;
+  }
+
+  .light .text-gradient {
+    @apply from-accent-dim via-emerald-600 to-accent-dim;
+  }
+
+  .tech-badge {
+    @apply px-3 py-1.5 text-xs font-mono bg-slate/50 border border-slate/50 rounded-lg text-silver 
+           hover:border-accent/50 hover:text-accent transition-all duration-300;
+  }
+
+  .light .tech-badge {
+    @apply bg-slate/30 border-slate/40 text-pearl hover:text-accent hover:border-accent/50;
+  }
+
+  .nav-link {
+    @apply relative text-silver hover:text-pearl transition-colors duration-300;
+  }
+
+  .light .nav-link {
+    @apply text-silver hover:text-pearl;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .btn-primary {
+    @apply relative px-6 py-3 bg-accent text-midnight font-semibold rounded-lg overflow-hidden
+           transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5;
+  }
+
+  .light .btn-primary {
+    @apply bg-accent-dim hover:shadow-accent-dim/30;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 border border-accent/50 text-accent font-medium rounded-lg
+           hover:bg-accent/10 transition-all duration-300 hover:border-accent;
+  }
+
+  .light .btn-outline {
+    @apply border-accent-dim/50 text-accent-dim hover:bg-accent-dim/10 hover:border-accent-dim;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-display font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+}
